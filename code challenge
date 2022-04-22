@@ -1,0 +1,58 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define endl '\n'
+
+void solve(){
+
+	int hsh[26] = {0};
+	string s,t;
+	long long hsh_ascii_sum = 0,t_ascii_sum = 0;
+
+	cin >> s >> t;
+	for(int i = 0;i < s.size();i++){
+	 hsh[s[i] - 'a']++;
+	 hsh_ascii_sum += s[i] - 'a';
+	}
+
+	int si = 0,i = 0,j = 0;
+	while(j <= s.size() && (si + i) < t.size() && ((t.size() - si) >= s.size())){
+		 
+		 if(hsh[t[si + i] - 'a'] > 0){
+		  t_ascii_sum += t[si + i] - 'a';
+		  i++;j++;
+		 }else{
+		  si = si + 1;i = 0;j = 0;t_ascii_sum = 0;
+		 }
+
+		 if(j == s.size()){
+		 
+		  if(t_ascii_sum == hsh_ascii_sum){
+		   cout << "YES" << endl;
+		   return;
+		 
+		 }else{
+
+		   j = 0;t_ascii_sum = 0;si++;i = 0;
+		  }
+		 }
+	}
+	
+	cout << "NO" << endl;
+
+}
+ 
+
+signed main(){
+
+   ios_base::sync_with_stdio(0);
+   cin.tie(0);cout.tie(0);  
+
+	int testCase;
+	cin >> testCase;
+	while(testCase--)
+
+	solve();
+
+}
